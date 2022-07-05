@@ -1,0 +1,13 @@
+ARG BASE_IMAGE=nvcr.io/nvidia/l4t-ml:r32.6.1-py3
+
+FROM ${BASE_IMAGE}
+
+RUN apt update && apt install -y ffmpeg vim && apt install -y pulseaudio
+RUN pip3 install python-vlc
+RUN pip3 install --upgrade nbconvert
+RUN apt install -y vlc
+RUN adduser root pulse-access
+RUN usermod -a -G audio root
+WORKDIR /homedocker/nvidia
+
+CMD ["bash"]
